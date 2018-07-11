@@ -68,11 +68,12 @@ public class DefaultDocumentLoader implements DocumentLoader {
 	@Override
 	public Document loadDocument(InputSource inputSource, EntityResolver entityResolver,
 			ErrorHandler errorHandler, int validationMode, boolean namespaceAware) throws Exception {
-
+		//使用SAX解析XML文档
 		DocumentBuilderFactory factory = createDocumentBuilderFactory(validationMode, namespaceAware);
 		if (logger.isDebugEnabled()) {
 			logger.debug("Using JAXP provider [" + factory.getClass().getName() + "]");
 		}
+		//EntityResolver的作用是项目本身就可以提供一个如何寻找DTD声明的方法
 		DocumentBuilder builder = createDocumentBuilder(factory, entityResolver, errorHandler);
 		return builder.parse(inputSource);
 	}
