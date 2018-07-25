@@ -103,6 +103,7 @@ public class SingleColumnRowMapper<T> implements RowMapper<T> {
 	@SuppressWarnings("unchecked")
 	@Nullable
 	public T mapRow(ResultSet rs, int rowNum) throws SQLException {
+		//验证返回结果数
 		// Validate column count.
 		ResultSetMetaData rsmd = rs.getMetaData();
 		int nrOfColumns = rsmd.getColumnCount();
@@ -110,6 +111,7 @@ public class SingleColumnRowMapper<T> implements RowMapper<T> {
 			throw new IncorrectResultSetColumnCountException(1, nrOfColumns);
 		}
 
+		//抽取第一个结果进行处理
 		// Extract column value from JDBC ResultSet.
 		Object result = getColumnValue(rs, 1, this.requiredType);
 		if (result != null && this.requiredType != null && !this.requiredType.isInstance(result)) {
