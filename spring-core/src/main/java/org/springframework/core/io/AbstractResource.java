@@ -51,6 +51,7 @@ public abstract class AbstractResource implements Resource {
 	@Override
 	public boolean exists() {
 		// Try file existence: can we find the file in the file system?
+		//这里的getFile()是调用子类的方法,如果直接调用父类的方法会报异常
 		try {
 			return getFile().exists();
 		}
@@ -140,6 +141,8 @@ public abstract class AbstractResource implements Resource {
 	 * content length. Subclasses will almost always be able to provide
 	 * a more optimal version of this, e.g. checking a File length.
 	 * @see #getInputStream()
+	 * 获取资源长度
+	 * 通过读取一遍来判断
 	 */
 	@Override
 	public long contentLength() throws IOException {
@@ -166,6 +169,7 @@ public abstract class AbstractResource implements Resource {
 	 * This implementation checks the timestamp of the underlying File,
 	 * if available.
 	 * @see #getFileForLastModifiedCheck()
+	 * 返回资源最后的修改时间
 	 */
 	@Override
 	public long lastModified() throws IOException {
